@@ -1,17 +1,28 @@
 import random as rand
 
-def guess(x):
-    rand_number = rand.randint(1,x)
-    guess = 0
-    while guess != rand_number:
-        guess = int(input(f"Guess a number between 1 and {x}: "))
-        print(guess)
-        if guess < rand_number:
-            print("Try something greater than that")
-        elif guess > rand_number:
-            print("Try something less than that")
+class GuessNumber:
+
+    def generate(self, upperBound):
+        return rand.randint(1,upperBound)
     
-    print(f"Nice Job! You got it! {rand_number}")
+    def guess(self, upperBound):
+        return int(input(f"Guess a number between 1 and {upperBound}: "))
         
-guess(10)
+    def checkGuess(self, upperBound):
+        randNumber = self.generate(upperBound)
+        guess = 0
+        
+        while (guess != randNumber):
+            guess = self.guess(upperBound)
+            if (guess > randNumber):
+                print("Try lower")
+            elif (guess < randNumber):
+                print("Try higher")
+        
+        print("You got it!")
+    
+firstVersion = GuessNumber()
+#firstVersion.randNumber = rand.randint(1,10)
+firstVersion.checkGuess(10)
+
         
